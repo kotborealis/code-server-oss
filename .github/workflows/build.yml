@@ -16,11 +16,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: echo "tag=$(date +%Y_%m_%d_%H-%M-%S)" >> $GITHUB_OUTPUT
-      - run: TAG=${{ steps.pre-step.outputs.tag }} npm run build
       - uses: elgohr/Publish-Docker-Github-Action@v5
         with:
           name: kotborealis/code-server-oss
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          tags: "latest,${{ steps.pre-step.outputs.tag }}"
+          cache: ${{ github.event_name != 'schedule' }}
+          snapshot: true
