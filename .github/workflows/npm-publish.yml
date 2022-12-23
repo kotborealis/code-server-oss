@@ -16,7 +16,13 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+      - run: docker-compose pull
       - run: npm run build
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - uses: elgohr/Publish-Docker-Github-Action@v5
+        with:
+          name: kotborealis/code-server-oss
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
