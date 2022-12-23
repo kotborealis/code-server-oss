@@ -2,7 +2,7 @@
 version: "3.8"
 services:
   code-server:
-    image: oss-code-server
+    image: kotborealis/code-server-oss:latest
     build:
         context: ./
         network: host
