@@ -13,4 +13,4 @@ mkdir  $ROOT/dist
 docker-compose build
 
 # Extract bundle
-docker run --rm --entrypoint tar oss-code-server -cz /vscode > $ROOT/dist/bundle.tar.gz
+docker run --rm --entrypoint tar kotborealis/code-server-oss:latest -cz /vscode > $ROOT/dist/bundle.tar.gz
