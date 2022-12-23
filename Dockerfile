@@ -1,4 +1,4 @@
-FROM node:16-buster
+FROM node:16-buster as builder
 
 ARG REVISION
 ARG HTTP_PROXY
@@ -40,6 +40,8 @@ RUN bash ./buildscripts/steps/30_build.sh
 COPY ./buildscripts/steps/40_postbuild.sh ./buildscripts/steps/
 RUN bash ./buildscripts/steps/40_postbuild.sh
 
+FROM node:16-buster
+COPY --from=builder /vscode /vscode
 COPY ./extensions/ ./extensions/
 
 # Entrypoint
