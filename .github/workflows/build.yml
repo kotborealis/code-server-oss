@@ -16,7 +16,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: docker-compose pull
       - run: TAG=$(date +%Y_%m_%d_%H-%M-%S) npm run build
       - uses: elgohr/Publish-Docker-Github-Action@v5
         with:
