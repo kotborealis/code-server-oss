@@ -42,7 +42,9 @@ RUN bash ./buildscripts/steps/40_postbuild.sh
 
 FROM node:16-buster
 COPY --from=builder /vscode /vscode
-COPY ./extensions/ ./extensions/
+COPY ./extensions/ /vscode/extensions/
+
+WORKDIR /vscode
 
 # Entrypoint
 COPY ./buildscripts/entrypoint.sh ./
