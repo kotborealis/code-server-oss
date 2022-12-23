@@ -4,8 +4,8 @@
 name: Docker image 
 
 on:
-  release:
-    types: [created]
+  schedule:
+    - cron: '0 2 * * *' # Weekly on Sundays at 02:00
   workflow_dispatch:
 
 jobs:
