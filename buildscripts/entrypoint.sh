@@ -5,7 +5,7 @@ set -ex
 # Get project root di
 ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-export NODE=${NODE:-node}
+export NODE=${NODE:-$ROOT/node/bin/node}
 
 export NODE_ENV=development
 export VSCODE_DEV=1
