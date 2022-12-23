@@ -15,7 +15,7 @@ code_server () {
 }
 
 echo "Preinstalling extensions..."
-for file in $(find $ROOT/vscode/extensions -name '*.vsix'); do
+for file in $(find $ROOT/extensions -name '*.vsix'); do
   echo "Installing $file"
   code_server --install-extension $file
 done
