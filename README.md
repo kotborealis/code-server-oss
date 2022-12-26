@@ -3,6 +3,11 @@
 Docker image of [Microsoft Code-Server](https://code.visualstudio.com/docs/remote/vscode-server), compiled from sources.
 Basically, this is an OSS version of code-server.
 
+# Builds
+
+Github actions builds new image every day from main branch of [microsoft/vscode](https://github.com/microsoft/vscode) and deploys it to [dockerhub kotborealis/code-server-oss](https://hub.docker.com/repository/docker/kotborealis/code-server-oss/tags?page=1&ordering=last_updated).
+Images are tagged by date and repo hash.
+
 # Usage
 
 Usage:
