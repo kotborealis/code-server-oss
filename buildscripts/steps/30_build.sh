@@ -3,4 +3,4 @@
 set -ex
 
 # Compile
-node ./build/lib/preLaunch.server.js
+yarn gulp vscode-reh-web-linux-x64-min

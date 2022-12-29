@@ -5,13 +5,10 @@ set -ex
 # Get project root di
 ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-export NODE=${NODE:-$ROOT/node/bin/node}
-
-export NODE_ENV=development
-export VSCODE_DEV=1
+export NODE=$(find .build/ -name 'node' -type f -executable)
 
 code_server () {
-  $NODE $ROOT/scripts/code-server.js $@
+  $NODE $ROOT/out/server-main.js $@
 }
 
 echo "Preinstalling extensions..."

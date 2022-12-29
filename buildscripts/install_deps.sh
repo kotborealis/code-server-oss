@@ -16,7 +16,10 @@ sed -i -e 's#"@vscode/telemetry-extractor": "^1.9.8",##g' package.json
 # cannot be installed in this case due to proxies.
 sed -i -e 's#"@vscode/ripgrep": "^1.14.2",##g' package.json
 
-yarn config set ignore-engines true
+# Set proper node version in yarnrc
+node build/npm/setupBuildYarnrc
+cp ./build/.yarnrc ./.yarnrc
+cp ./build/.yarnrc ./remote/.yarnrc
 
 # Install node_modules
 yarn $@
