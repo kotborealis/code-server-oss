@@ -23,7 +23,7 @@ jobs:
           node-version: 16
       - uses: elgohr/Publish-Docker-Github-Action@v5
         env:
-          VSCODE_TAG: ${{ github.event.inputs.message }}
+          VSCODE_TAG: ${{ github.event.inputs.vscode_tag }}
         with:
           name: kotborealis/code-server-oss
           username: ${{ secrets.DOCKER_USERNAME }}
