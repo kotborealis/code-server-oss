@@ -1,6 +1,6 @@
 FROM node:16-buster as builder
 
-ARG REVISION
+ARG VSCODE_TAG=master
 ARG HTTP_PROXY
 ARG HTTPS_PROXY
 
@@ -19,10 +19,9 @@ RUN apt-get update && \
 # Proxy is only needed during git clone and yarn
 ENV HTTP_PROXY=$HTTP_PROXY
 ENV HTTPS_PROXY=$HTTPS_PROXY
-ARG VSCODE_TAG=master
 
 # vscode dist
-RUN git clone --progress --filter=tree:0 https://github.com/microsoft/vscode.git --branch=${VSCODE_TAG:-master} ./vscode
+RUN git clone --progress --filter=tree:0 https://github.com/microsoft/vscode.git --branch=VSCODE_TAG ./vscode
 WORKDIR vscode
 
 # Build
