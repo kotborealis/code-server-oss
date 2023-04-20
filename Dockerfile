@@ -1,6 +1,6 @@
 FROM node:16-buster as builder
 
-ARG VSCODE_TAG=master
+ARG VSCODE_TAG=main
 ARG HTTP_PROXY
 ARG HTTPS_PROXY
 
@@ -21,7 +21,7 @@ ENV HTTP_PROXY=$HTTP_PROXY
 ENV HTTPS_PROXY=$HTTPS_PROXY
 
 # vscode dist
-RUN git clone --progress --filter=tree:0 https://github.com/microsoft/vscode.git --branch=VSCODE_TAG ./vscode
+RUN git clone --progress --filter=tree:0 https://github.com/microsoft/vscode.git --branch=$VSCODE_TAG ./vscode
 WORKDIR vscode
 
 # Build
