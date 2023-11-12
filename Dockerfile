@@ -1,4 +1,4 @@
-FROM node:16-buster as builder
+FROM node:18-buster as builder
 
 ARG VSCODE_TAG=main
 ARG HTTP_PROXY
