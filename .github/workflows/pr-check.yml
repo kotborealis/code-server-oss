@@ -1,0 +1,47 @@
+name: PR build check
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read VSCode tag
+        run: |
+          if [ ! -f VSCODE_TAG ]; then
+            echo "VSCODE_TAG file missing"
+            exit 1
+          fi
+          TAG=$(cat VSCODE_TAG | tr -d '\n')
+          if [ -z "$TAG" ]; then
+            echo "VSCODE_TAG is empty"
+            exit 1
+          fi
+          case "$TAG" in
+            *[[:space:]/]*)
+              echo "VSCODE_TAG must not contain spaces or '/'"
+              exit 1
+              ;;
+            v[0-9]*.[0-9]*.[0-9]*|[0-9]*.[0-9]*.[0-9]*)
+              ;;
+            *)
+              echo "VSCODE_TAG must be a VS Code tag like 1.109.5 or v1.109.5"
+              exit 1
+              ;;
+          esac
+          echo "VSCODE_TAG=$TAG" >> "$GITHUB_ENV"
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Build image (no push)
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: false
+          build-args: VSCODE_TAG=${{ env.VSCODE_TAG }}
+          tags: kotborealis/code-server-oss:pr-${{ github.event.pull_request.number }}
