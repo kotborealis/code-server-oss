@@ -1,4 +1,4 @@
-FROM node:16-buster as builder
+FROM node:22-bookworm as builder
 
 ARG VSCODE_TAG=main
 ARG HTTP_PROXY
@@ -7,6 +7,7 @@ ARG HTTPS_PROXY
 # Build deps
 RUN apt-get update && \
     apt-get install -y \
+        curl \
         libxkbfile-dev \
         pkg-config \
         libsecret-1-dev \
@@ -41,7 +42,7 @@ RUN bash ./buildscripts/steps/30_build.sh
 COPY ./buildscripts/steps/40_postbuild.sh ./buildscripts/steps/
 RUN bash ./buildscripts/steps/40_postbuild.sh
 
-FROM node:16-buster
+FROM node:22-bookworm
 COPY --from=builder /code-server-oss /code-server-oss
 WORKDIR /code-server-oss
 
