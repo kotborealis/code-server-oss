@@ -5,8 +5,16 @@ Basically, this is an OSS version of code-server.
 
 # Builds
 
-Github actions builds new image every day from main branch of [microsoft/vscode](https://github.com/microsoft/vscode) and deploys it to [dockerhub kotborealis/code-server-oss](https://hub.docker.com/repository/docker/kotborealis/code-server-oss/tags?page=1&ordering=last_updated).
-Images are tagged by date and repo hash.
+Builds are driven by the `VSCODE_TAG` file in this repo.
+
+Workflow:
+1. Open a PR and set `VSCODE_TAG` to the desired VS Code tag or commit.
+2. CI builds the image on the PR (no push).
+3. When the PR is merged to `main`, CI builds again, pushes the Docker image, and creates a GitHub Release.
+
+Published image tags:
+- `kotborealis/code-server-oss:<VSCODE_TAG>`
+- `kotborealis/code-server-oss:latest`
 
 # Usage
 
