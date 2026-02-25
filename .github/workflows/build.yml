@@ -35,6 +35,12 @@ jobs:
               echo "VSCODE_TAG must not contain spaces or '/'"
               exit 1
               ;;
+            v[0-9]*.[0-9]*.[0-9]*|[0-9]*.[0-9]*.[0-9]*)
+              ;;
+            *)
+              echo "VSCODE_TAG must be a VS Code tag like 1.109.5 or v1.109.5"
+              exit 1
+              ;;
           esac
           echo "VSCODE_TAG=$TAG" >> "$GITHUB_ENV"
 
@@ -70,6 +76,12 @@ jobs:
               echo "VSCODE_TAG must not contain spaces or '/'"
               exit 1
               ;;
+            v[0-9]*.[0-9]*.[0-9]*|[0-9]*.[0-9]*.[0-9]*)
+              ;;
+            *)
+              echo "VSCODE_TAG must be a VS Code tag like 1.109.5 or v1.109.5"
+              exit 1
+              ;;
           esac
           echo "VSCODE_TAG=$TAG" >> "$GITHUB_ENV"
 
@@ -96,5 +108,5 @@ jobs:
           tag_name: vscode-${{ env.VSCODE_TAG }}
           name: VS Code ${{ env.VSCODE_TAG }}
           body: |
-            Built from VS Code tag/commit: ${{ env.VSCODE_TAG }}
+            Built from VS Code tag: ${{ env.VSCODE_TAG }}
             Docker image: kotborealis/code-server-oss:${{ env.VSCODE_TAG }}
