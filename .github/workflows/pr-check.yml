@@ -43,5 +43,29 @@ jobs:
         with:
           context: .
           push: false
+          load: true
           build-args: VSCODE_TAG=${{ env.VSCODE_TAG }}
           tags: kotborealis/code-server-oss:pr-${{ github.event.pull_request.number }}
+
+      - name: Run container
+        run: |
+          docker run -d --rm --name code-server-oss-ci -p 8080:8080 \
+            kotborealis/code-server-oss:pr-${{ github.event.pull_request.number }} \
+            --host 0.0.0.0 --port 8080 --without-connection-token
+
+      - name: Wait for server
+        run: |
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8080 >/dev/null; then
+              echo "Server is up"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Server did not become ready"
+          docker logs code-server-oss-ci
+          exit 1
+
+      - name: Stop container
+        if: always()
+        run: docker stop code-server-oss-ci
