@@ -10,7 +10,7 @@ Builds are driven by the `VSCODE_TAG` file in this repo.
 Workflow:
 1. Open a PR and set `VSCODE_TAG` to the desired VS Code tag or commit.
 2. CI builds the image on the PR (no push).
-3. When the PR is merged to `main`, CI builds again, pushes the Docker image, and creates a GitHub Release.
+3. When the PR is merged to `master`, CI builds again, pushes the Docker image, and creates a GitHub Release.
 
 Published image tags:
 - `kotborealis/code-server-oss:<VSCODE_TAG>`
